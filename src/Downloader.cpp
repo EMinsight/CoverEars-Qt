@@ -116,18 +116,29 @@ void Downloader::mulitDownload(const QString &url, const qint64 length, const QS
         const qint64 bufSize = 1024 * 32;
         QByteArray data(bufSize, 0);
         connect(reply, &QNetworkReply::readyRead, this, [&](){
-            qint64 realSize = 0;
-            do {
-                realSize = reply->read(data.data(), bufSize);
-                if (realSize <= 0) {
-                    break;
-                }
-                memcpy(pData + hasWritePos, data.data(), realSize);
-                hasWritePos += realSize;
-            } while (realSize);
+//            qint64 realSize = 0;
+//            do {
+//                realSize = reply->read(data.data(), bufSize);
+//                if (realSize <= 0) {
+//                    break;
+//                }
+//                memcpy(pData + hasWritePos, data.data(), realSize);
+//                hasWritePos += realSize;
+//            } while (realSize);
+
 //            auto d = reply->readAll();
 //            memcpy(pData + hasWritePos, d.data(), d.size());
 //            hasWritePos += d.size();
+
+            qint64 realSize = 0;
+            do {
+                realSize = reply->read((char *)pData + hasWritePos, bufSize);
+                if (realSize <= 0) {
+                    break;
+                }
+                hasWritePos += realSize;
+            } while (realSize);
+
         });
         QEventLoop event;
         connect(reply, &QNetworkReply::finished, &event, &QEventLoop::quit);
