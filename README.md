@@ -41,6 +41,12 @@ Qt版多线程下载器
 
 (尝试过seek的方式,多线程写会出问题，需要加锁。后来就换成内存映射文件了)
 
+改进：
+readAll 换成read到固定buffer,减少QByteArray的内存分配，增加了memcpy的次数
+
+再改进：
+直接read到mapping的 pData。固定buffer也不要了。减少memcpy。
+
 # 性能记录
 
 测试环境
