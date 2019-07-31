@@ -84,7 +84,7 @@ void Downloader::mulitDownload(const QString &url, const qint64 length, const QS
     }
     bool ok = file.resize(length);
     qWarning() << "resize" << ok << file.size();
-    ok = file.setPermissions(QFileDevice::ReadUser | QFileDevice::ReadUser | QFileDevice::ReadGroup | QFileDevice::WriteGroup);
+    ok = file.setPermissions(QFileDevice::ReadUser | QFileDevice::WriteUser | QFileDevice::ReadGroup | QFileDevice::WriteGroup);
     qWarning() << "set permission " << ok;
     uchar *pData = file.map(0, length);
     if (!pData) {
@@ -116,18 +116,21 @@ void Downloader::mulitDownload(const QString &url, const qint64 length, const QS
         const qint64 bufSize = 1024 * 32;
         QByteArray data(bufSize, 0);
         connect(reply, &QNetworkReply::readyRead, this, [&](){
-            if (hasWritePos > pair.second) {
-                return;
-            }
-            qint64 realSize = 0;
-            do {
-                realSize = reply->read(data.data(), bufSize);
-                if (realSize <= 0) {
-                    break;
-                }
-                memcpy(pData + hasWritePos, data.data(), realSize);
-                hasWritePos += realSize;
-            } while (realSize);
+//            if (hasWritePos > pair.second) {
+//                return;
+//            }
+//            qint64 realSize = 0;
+//            do {
+//                realSize = reply->read(data.data(), bufSize);
+//                if (realSize <= 0) {
+//                    break;
+//                }
+//                memcpy(pData + hasWritePos, data.data(), realSize);
+//                hasWritePos += realSize;
+//            } while (realSize);
+            auto d = reply->readAll();
+            memcpy(pData + hasWritePos, d.data(), d.size());
+            hasWritePos += d.size();
         });
         QEventLoop event;
         connect(reply, &QNetworkReply::finished, &event, &QEventLoop::quit);
