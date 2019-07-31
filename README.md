@@ -50,9 +50,9 @@ Qt版多线程下载器
 测试了两个文件
 
 |文件名|大小|路径|
-| :---------------: | :-----------------: | :-----------------:|
-|qtlinguistinstaller-5.12.2.exe| 36.2MB |"http://download.qt.io/linguist_releases/qtlinguistinstaller-5.12.2.exe"
-|qt-everywhere-src-5.12.4.tar.xz| 484MB |"http://download.qt.io/official_releases/qt/5.12/5.12.4/single/qt-everywhere-src-5.12.4.tar.xz" |
+|---------------|-----------------|-----------------|
+|qtlinguistinstaller-5.12.2.exe| 36.2MB |http://download.qt.io/linguist_releases/qtlinguistinstaller-5.12.2.exe|
+|qt-everywhere-src-5.12.4.tar.xz| 484MB |http://download.qt.io/official_releases/qt/5.12/5.12.4/single/qt-everywhere-src-5.12.4.tar.xz|
 
 
 耗时统计使用QTime, 从发起网络请求开始，到文件写入完成。
@@ -63,7 +63,7 @@ Qt版多线程下载器
 测试大致结果
 
 |编号|文件|耗时(ms)|线程数|备注|
-| :---------------: | :---------------: | :-----------------: | :-----------------:|:-----------------:|
+|---------------|--------------- |----------------- |-----------------|-----------------|
 |1-1|qtlinguistinstaller-5.12.2.exe|10493|1||
 |1-2|qtlinguistinstaller-5.12.2.exe|17644|1||
 |1-3|qtlinguistinstaller-5.12.2.exe|11840|1||
