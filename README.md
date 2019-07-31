@@ -4,7 +4,7 @@
 
 Qt版多线程下载器
 
-还有个golang版本的，[github.com/jaredtao/CoverEars](github.com/jaredtao/CoverEars)
+还有个golang版本的，[golang版CoverEars](https://github.com/jaredtao/CoverEars)
 
 # 徽章
 
